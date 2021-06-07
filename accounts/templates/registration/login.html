@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="form-signin">
+      <form method="POST">
+          {% csrf_token %}
+{#        <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">#}
+        <h1 class="h3 mb-4 mt-3 fw-normal center">Zaloguj się</h1>
+
+          <input type="text" class="form-control mb-3" id="floatingInput" placeholder="Nazwa użytkownika" name="username">
+
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Hasło" name="password">
+        </div>
+
+        <div class="checkbox mb-2">
+          <label>
+            <input type="checkbox" value="remember-me"> Zapamiętaj mnie
+          </label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Zaloguj</button>
+
+        <div class="create mt-4 mb-2 center">
+            <label id="floatingPassword">Nie masz jeszcze konta?</label>
+        </div>
+        <a href="{% url 'signup' %}" class="w-100 btn btn-lg btn-primary" type="submit"> Stwórz konto</a>
+        <p class="mt-5 mb-3 text-muted">&copy; NiceRide.com 2021</p>
+      </form>
+</main>
+{% endblock %}
+
