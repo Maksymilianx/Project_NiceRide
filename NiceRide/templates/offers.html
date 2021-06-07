@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="dashboard-content border-dashed p-3 m-4 view-height">
+
+    <div class="row border-bottom border-3 p-1 m-1">
+        <div class="col noPadding">
+            <h3 class="color-header text-uppercase center mb-4">Lista ogłoszeń</h3>
+        </div>
+    </div>
+    <form>
+        {% csrf_token %}
+        <input class="mt-4 ml-5 pt-0 pb-1 rounded-1" type="text" name="brand_of_car" placeholder="marka samochodu">
+        <input class="btn btn-success pt-1 pb-1 " type="submit" value="Szukaj">
+        <label><a href="{% url 'adv_search' %}" class="btn btn-color rounded-1 ml-4 pb-1 pt-1">Wyszukiwanie zaawansowane</a></label>
+    </form>
+    <table class="table border-bottom schedules-content">
+        <thead>
+        <tr class="d-flex text-color-darker">
+            <th scope="col" class="col-1">NAZWA</th>
+            <th scope="col" class="col-1">CENA</th>
+            <th scope="col" class="col-1">UŻYTKOWNIK</th>
+            <th scope="col" class="col-7">OPIS</th>
+        </tr>
+        </thead>
+        <tbody class="text-color-lighter">
+            {% for offer in offers %}
+                <tr class="d-flex">
+                    <th scope="row" class="col-1">{{ offer.brand_of_car }} {{ offer.car_model }}</th>
+                    <td class="col-1">
+                        {{ offer.price }} PLN
+                    </td>
+                    <td class="col-1">{{ offer.user }}</td>
+                    <td class="col-7">{{ offer.description }}</td>
+                    <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">
+                        {% if user == offer.user %}
+                            <a href="{% url 'delete_offer' offer.id %}" class="btn btn-danger rounded-1 text-light m-1">Usuń</a>
+                            <a href="{{ offer.id }}" class="btn btn-info rounded-1 text-light m-1">Szczegóły</a>
+                            <a href="{% url 'edit_offer' offer.id %}" class="btn btn-warning rounded-1 text-light m-1">Edytuj</a>
+                        {% else %}
+                            <a href="{{ offer.id }}" class="btn btn-color rounded-1 text-light m-1">Szczegóły ogłoszenia</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <span>
+        <p align="center">
+            {% if offers.has_previous %}
+                <a href="?page={{ offers.previous_page_number }}">poprzednia</a>
+            {% endif %}
+
+            |{% for page in page_number %}
+                | <a href="?page={{ page }}">{{ page }}</a>|
+            {% endfor %}
+
+            {% if offers.has_next %}
+                <a href="?page={{ offers.next_page_number }}">następna</a>
+            {% endif %}
+        </p>
+    </span>
+</div>
+{% endblock content %}

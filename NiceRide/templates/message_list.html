@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% block content %}
+    {% for message in object_list %}
+    <div style="border: solid darkred">
+        <div class="container mt-4">
+          <b>Od: {{ message.from_user }}</b>
+        </div>
+        <div class="container darker">
+          <b>Do: {{ message.to_user }}</b>
+        </div>
+        <div class="container">
+          <b>Temat: {{ message.subject }}</b>
+        </div>
+        <div class="container">
+          <b>Data: {{ message.date }}</b>
+        </div>
+            <br>
+        <div class="container">
+          <p>{{ message.content }}</p>
+        </div>
+    </div>
+    {% endfor %}
+<label><a href="{% url 'send_message' %}" class="btn btn-color rounded-1 mt-2 ml-4 pb-1 pt-1">Napisz wiadomość</a></label>
+{% endblock %}

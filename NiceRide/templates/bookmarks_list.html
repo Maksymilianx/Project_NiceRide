@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% block content %}
+    {% for follow in object_list %}
+    <div style="border: solid darkred">
+        <div class="container mt-4">
+          <b><a href="#">bookmark</a> {{ follow.followed }} </b>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

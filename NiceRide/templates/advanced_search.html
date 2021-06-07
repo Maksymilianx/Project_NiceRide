@@ -1,0 +1,99 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <main role="main" class="container">
+
+      <h3>Zaawansowane wyszukiwanie</h3>
+      <form method="post" action=".">
+          {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="car_brand" placeholder="Marka samochodu" />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="car_model" placeholder="Model samochodu" />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+{#        <div class="form-row">#}
+{#            <div class="form-group col-12">#}
+{#                <div class="input-group">#}
+{#                    <input class="form-control py-2 border-right-0 border" type="search" name="title_or_author" placeholder="Title or author..." />#}
+{#                    <span class="input-group-append">#}
+{#                        <div class="input-group-text bg-transparent">#}
+{#                            <i class="fa fa-search"></i>#}
+{#                        </div>#}
+{#                    </span>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+        <div class="form-row">
+          <div class="form-group col-md-2 col-lg-2">
+            <label for="viewCountMin">Cena minimalna</label>
+            <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="price_min">
+          </div>
+          <div class="form-group col-md-2 col-lg-2">
+            <label for="viewCountMax">Cena maksymalna</label>
+            <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="0" name="price_max">
+          </div>
+          <div class="form-group col-md-2 col-lg-2">
+            <label for="publishDateMin">Przebieg minimalny</label>
+            <input type="number" class="form-control" id="publishDateMin" placeholder="0" name="mileage_min">
+          </div>
+          <div class="form-group col-md-2 col-lg-2">
+            <label for="publishDateMax">Przebieg maksymalny</label>
+            <input type="number" class="form-control" id="publishDateMax" placeholder="0" name="mileage_max">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="category">Rodzaj paliwa</label>
+            <select id="category" class="form-control" name="fuel_type">
+              <option selected>Wybierz...</option>
+              {% for type in fuel_types %}
+              <option>{{ type.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
+      <hr />
+
+      <div class="row">
+        <ul>
+          {% for car in queryset %}
+            <li>
+                <a href="{% url 'details' car.id %}">
+                  <b>Marka: </b>{{ car.brand_of_car }}
+                  <span><b>Model: </b>{{ car.car_model }}</span>
+                  <span><b>Cena: </b>{{ car.price }}</span>
+                  <span><b>Przebieg: </b>{{ car.mileage }}</span>
+                  <span><b>Kraj pochodzenia: </b>{{ car.country }}</span>
+                  <span><b>Typ samochodu: </b>{{ car.type }}</span>
+                  <span><b>Pojemność skokowa: </b>{{ car.engine_capacity }}</span>
+                  <span><b>Moc: </b>{{ car.horse_power }}</span>
+                  <span><b>Rodzaj paliwa: </b>{{ car.fuel_type }}</span>
+                </a>
+            </li>
+            <hr />
+          {% endfor %}
+        </ul>
+      </div>
+    </main>
+{% endblock %}
