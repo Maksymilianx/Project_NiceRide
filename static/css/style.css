@@ -256,8 +256,19 @@ margin: 0 auto !important;
 
 .div-img {
   height: 315px;
-  width: 315px;
-  background: var(--lighter-background-color)
+  width: 260px;
+  background: var(--dark-red);
+  margin-left: 70px;
+  margin-top: 20px;
+
+}
+
+.profile-img {
+  height: 280px;
+  width: 180px;
+  margin-left: 40px;
+  margin-top: 15px;
+
 }
 
 /*------------------------------*/
