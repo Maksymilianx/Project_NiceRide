@@ -149,8 +149,12 @@ margin: 0 auto !important;
 /*------------------------------*/
 
 .page-header {
-  background: var(--dark-red);
+  background: var(--dark-red) !important;
+  position: sticky;
+  top: 0;
+  width: 100%;
 }
+
 
 .nav-link {
   color: var(--light-link-color)!important;
