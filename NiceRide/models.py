@@ -17,7 +17,7 @@ class Car(models.Model):
     horse_power = models.IntegerField(default=0)
     country = models.CharField(max_length=64, default='')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    images = models.ImageField(upload_to='images/', null=True)
+    images = models.ImageField(upload_to='images/', null=True, blank=True)
 
 
     COLORS = [

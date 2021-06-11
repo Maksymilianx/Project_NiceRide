@@ -8,7 +8,7 @@ class OfferCreationForm(forms.ModelForm):
         model = Car
         fields = '__all__'
         widgets = {
-            'description': forms.Textarea(),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 

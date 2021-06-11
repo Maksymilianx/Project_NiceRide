@@ -28,7 +28,7 @@ class IndexView(View):
 class SellCarView(LoginRequiredMixin, View):
     def get(self, request):
         form = OfferCreationForm()
-        return render(request, 'add-offer.html', {'form': form})
+        return render(request, 'add_offer.html', {'form': form})
 
     def post(self, request):
         form = OfferCreationForm(request.POST)
@@ -37,7 +37,7 @@ class SellCarView(LoginRequiredMixin, View):
             sell_car.creator = request.user
             sell_car.save()
             return redirect('offers')
-        return render(request, "add-offer.html", {'form': form})
+        return render(request, "add_offer.html", {'form': form})
 
 
 class OffersView(View):
@@ -59,7 +59,7 @@ class OfferDetailsView(View):
     def get(self, request, id):
         offer = Car.objects.get(pk=id)
         comments = Opinions.objects.all()
-        return render(request, "offer-details.html", {'offer': offer, 'comments': comments})
+        return render(request, "offer_details.html", {'offer': offer, 'comments': comments})
 
 
 class OfferAddBookmarksView(View):
@@ -107,7 +107,7 @@ class DeleteOfferView(LoginRequiredMixin, DeleteView):
     fields = ['brand_of_car', 'car_model', 'description', 'price', 'production_year', 'mileage', 'engine_capacity',
               'horse_power', 'country', 'car_color', 'fuel_type', 'type']
     success_url = reverse_lazy('offers')
-    template_name = 'add-offer.html'
+    template_name = 'add_offer.html'
 
 
 class EditOfferView(LoginRequiredMixin, UpdateView):
@@ -115,7 +115,7 @@ class EditOfferView(LoginRequiredMixin, UpdateView):
     fields = ['brand_of_car', 'car_model', 'description', 'price', 'production_year', 'mileage', 'engine_capacity',
               'horse_power', 'country', 'car_color', 'fuel_type', 'type']
     success_url = reverse_lazy('offers')
-    template_name = 'add-offer.html'
+    template_name = 'add_offer.html'
 
 
 class AdvancedSearchView(View):
