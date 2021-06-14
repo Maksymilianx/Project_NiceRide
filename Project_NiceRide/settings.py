@@ -74,16 +74,13 @@ WSGI_APPLICATION = 'Project_NiceRide.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'NiceRide',
-        'HOST': 'localhost',
-        'PASSWORD': 'coderslab',
-        'USER': 'postgres',
-        'PORT': 5432
-    }
-}
+try:
+    from Project_NiceRide.local_settings import DATABASES
+except ModuleNotFoundError:
+    print("Database is not configured in local_settings.py!")
+    print("Fill the missing file and try again!")
+    exit(0)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
