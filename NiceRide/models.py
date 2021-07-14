@@ -19,7 +19,6 @@ class Car(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     images = models.ImageField(upload_to='images/', null=True, blank=True)
 
-
     COLORS = [
         ('BEIGE', 'Beige'),
         ('WHITE', 'White'),

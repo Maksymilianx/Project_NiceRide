@@ -16,13 +16,8 @@ from NiceRide.models import Car, Opinions, Messages, ObserveCar
 
 class IndexView(View):
     def get(self, request):
-        queryset = Car.objects.all()
         lst = list(Car.objects.all())
-        random.shuffle(lst)
-        l1 = lst[0]
-        l2 = lst[1]
-        l3 = lst[2]
-        return render(request, 'index.html', {'queryset': queryset, "lst": lst, "l1": l1, "l2": l2, "l3": l3})
+        return render(request, 'index.html', {"lst": lst})
 
 
 class SellCarView(LoginRequiredMixin, View):
