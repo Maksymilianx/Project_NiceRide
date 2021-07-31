@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db import models
 
+
 # Create your models here.
 
 
@@ -17,7 +18,7 @@ class Car(models.Model):
     horse_power = models.IntegerField(default=0)
     country = models.CharField(max_length=64, default='')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    images = models.ImageField(upload_to='images/', null=True, blank=True)
+    images = models.ImageField(null=True, blank=True)
 
     COLORS = [
         ('BEIGE', 'Beige'),
@@ -88,3 +89,11 @@ class Messages(models.Model):
 class ObserveCar(models.Model):
     followed_by = models.ManyToManyField(User, related_name='favourite', blank=True)
     followed = models.ManyToManyField(Car)
+
+
+class OfferImage(models.Model):
+    car = models.ForeignKey(Car, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.car.brand_of_car
