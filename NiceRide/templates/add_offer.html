@@ -13,74 +13,92 @@
                 <a href="/" class="btn btn-dark my-1">Go Back</a>
                 <div class="card">
                     <form method='POST' action="" enctype="multipart/form-data">
+
                             {% csrf_token %}
-
                             <div class="form-group m-3">
-                                <label>Description</label>
-                                <input required name="description" type="text" placeholder="Enter a description"
+                                <label>Marka</label>
+                                <input required name="description" type="text" placeholder="Podaj markę samochodu"
                                     class="form-control">
                             </div>
 
                             <div class="form-group m-3">
-                                <label>Select a category</label>
-                                <select name="category" class="form-control">
-                                    <option value='none'>Select a category...</option>
-
-    {#                                {% for category in categories %}#}
-    {#                                <option value='{{category.id}}'>{{category.name}}</option>#}
-    {#                                {% endfor %}#}
-                                </select>
+                                <label>Model</label>
+                                <input name="description" class="form-control" placeholder="Podaj model samochodu">
                             </div>
 
                             <div class="form-group m-3">
-                                <label>Create a new category</label>
-                                <input name="category_new" type="text" placeholder="Create a new category"
+                                <label>Opis</label>
+                                <input style="height:200px; width: 315px" required name="description" type="text" placeholder="Opisz ładnie swój samochód :)"
                                     class="form-control">
                             </div>
-
-                            <div class="form-group m-3">
-                                <label>Upload image</label>
-                                <input required name="images" type="file" multiple class="form-control-file">
-                            </div>
-
-                            <button type='submit' class="btn btn-primary m-3">Submit</button>
 
                         </form>
                 </div>
             </div>
             <div class="col-md-4 mt-5">
 
-
                 <div class="card">
 
                     <form method='POST' action="" enctype="multipart/form-data">
                         {% csrf_token %}
-
                         <div class="form-group m-3">
-                            <label>Description</label>
-                            <input required name="description" type="text" placeholder="Enter a description"
+                            <label>Data dodania</label>
+                            <input required name="description" type="date"
                                 class="form-control">
                         </div>
 
                         <div class="form-group m-3">
-                            <label>Select a category</label>
-                            <select name="category" class="form-control">
-                                <option value='none'>Select a category...</option>
+                            <label>Cena</label>
+                            <input name="category_new" type="number" placeholder="Podaj cenę samochodu"
+                                class="form-control">
+                        </div>
 
-{#                                {% for category in categories %}#}
-{#                                <option value='{{category.id}}'>{{category.name}}</option>#}
+                        <div class="form-group m-3">
+                            <label>Rocznik</label>
+                            <input name="category_new" type="number" placeholder="Podaj rok podukcji samochodu"
+                                class="form-control">
+                        </div>
+                        <div class="form-group m-3">
+                            <label>Przebieg</label>
+                            <input name="category_new" type="number" placeholder="Podaj przegieg samochodu"
+                                class="form-control">
+                        </div>
+                        <div class="form-group m-3">
+                            <label>Silnik</label>
+                            <input name="category_new" type="number" placeholder="Podaj pojemność silnika"
+                                class="form-control">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 mt-5">
+                <div class="card">
+                    <form method='POST' action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group m-3">
+                            <label>Moc</label>
+                            <input required name="description" type="number" placeholder="Podaj moc samochodu (w KM)"
+                                class="form-control">
+                        </div>
+                        <div class="form-group m-3">
+                            <label>Kraj</label>
+                            <input name="category_new" type="text" placeholder="Skąd pochodzi samochód?"
+                                class="form-control">
+                        </div>
+                        <div class="form-group m-3">
+                            <label>Kolor</label>
+                            <select name="category" class="form-control">
+                                <option value='none'>Wybierz kolor samochodu</option>
+
+{#                                {% for color in colors %}#}
+{#                                <option value='{{color}}'>{{category.name}}</option>#}
 {#                                {% endfor %}#}
                             </select>
                         </div>
 
                         <div class="form-group m-3">
-                            <label>Create a new category</label>
-                            <input name="category_new" type="text" placeholder="Create a new category"
-                                class="form-control">
-                        </div>
-
-                        <div class="form-group m-3">
-                            <label>Upload image</label>
+                            <label>Upload images</label>
                             <input required name="images" type="file" multiple class="form-control-file">
                         </div>
 
