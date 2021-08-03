@@ -22,17 +22,13 @@ class IndexView(View):
 
 class SellCarView(LoginRequiredMixin, View):
     def get(self, request):
-        form = OfferCreationForm()
-        return render(request, 'add_offer.html', {'form': form})
+        colors = Car.car_color
+        return render(request, 'add_offer.html', {'colors': colors})
 
     def post(self, request):
-        form = OfferCreationForm(request.POST)
-        if form.is_valid():
-            sell_car = form.save(commit=False)
-            sell_car.creator = request.user
-            sell_car.save()
-            return redirect('offers')
-        return render(request, "add_offer.html", {'form': form})
+        images = request.FILES.getlist('images')
+
+        return render(request, "add_offer.html")
 
 
 class OffersView(View):
@@ -113,6 +109,10 @@ class EditOfferView(LoginRequiredMixin, UpdateView):
     template_name = 'add_offer.html'
 
 
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
+
 class AdvancedSearchView(View):
     def get(self, request):
         queryset = Car.objects.all()
@@ -120,6 +120,7 @@ class AdvancedSearchView(View):
         return render(request, "advanced_search.html", {'queryset': queryset, 'fuel_types': ft})
 
     def post(self, request):
+
         queryset = Car.objects.all()
         car_brand = request.POST.get('car_brand')
         car_model = request.POST.get('car_model')
@@ -129,18 +130,19 @@ class AdvancedSearchView(View):
         mileage_max = request.POST.get('mileage_max')
         fuel_type = request.POST.get('fuel_type')
 
-        if car_brand != '' and car_brand is not None:
+        if is_valid_queryparam(car_brand):
             queryset = queryset.filter(brand_of_car__icontains=car_brand)
-        if car_model != '' and car_model is not None:
+
+        if is_valid_queryparam(car_model):
             queryset = queryset.filter(car_model__icontains=car_model)
-        if price_min != '' and price_min is not None:
+        if is_valid_queryparam(price_min):
             queryset = queryset.filter(price__gte=price_min)
-        if price_max != '' and price_max is not None:
+        if is_valid_queryparam(price_max):
             queryset = queryset.filter(price__lt=price_max)
 
-        if mileage_min != '' and mileage_min is not None:
+        if is_valid_queryparam(mileage_min):
             queryset = queryset.filter(price__gte=mileage_min)
-        if mileage_max != '' and mileage_max is not None:
+        if is_valid_queryparam(mileage_max):
             queryset = queryset.filter(price__lt=mileage_max)
         if fuel_type != 'Wybierz...':
             queryset = queryset.filter(fuel_type=fuel_type)
@@ -180,4 +182,3 @@ class ShowMessagesView(LoginRequiredMixin, ListView):
 class AboutView(View):
     def get(self, request):
         return render(request, "about.html")
-
