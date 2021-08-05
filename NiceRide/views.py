@@ -22,13 +22,31 @@ class IndexView(View):
 
 class SellCarView(LoginRequiredMixin, View):
     def get(self, request):
-        colors = Car.car_color
-        return render(request, 'add_offer.html', {'colors': colors})
+        color = Car.objects.all()
+        return render(request, 'add_offer.html', {'color': color})
 
     def post(self, request):
-        images = request.FILES.getlist('images')
+        car_brand = request.POST.get('brand_of_car')
+        car_model = request.POST.get('car_model')
+        description = request.POST.get('description')
+        date = request.POST.get('created')
+        price = request.POST.get('price')
+        year = request.POST.get('production_year')
+        mileage = request.POST.get('mileage')
+        engine = request.POST.get('engine_capacity')
+        hp = request.POST.get('horse_power')
+        country = request.POST.get('country')
+        fuel_type = request.POST.get('fuel_type')
+        # images = request.FILES.getlist('images')
+        type = request.POST.get('type')
+        color = request.POST.get('color')
 
-        return render(request, "add_offer.html")
+        car = Car(brand_of_car=car_brand, car_model=car_model, description=description, created=date, price=price,
+              production_year=year, mileage=mileage, engine_capacity=engine, horse_power=hp, country=country,
+              fuel_type=fuel_type, type=type, car_color=color)
+        car.save()
+        return redirect('offers')
+
 
 
 class OffersView(View):
@@ -132,14 +150,12 @@ class AdvancedSearchView(View):
 
         if is_valid_queryparam(car_brand):
             queryset = queryset.filter(brand_of_car__icontains=car_brand)
-
         if is_valid_queryparam(car_model):
             queryset = queryset.filter(car_model__icontains=car_model)
         if is_valid_queryparam(price_min):
             queryset = queryset.filter(price__gte=price_min)
         if is_valid_queryparam(price_max):
             queryset = queryset.filter(price__lt=price_max)
-
         if is_valid_queryparam(mileage_min):
             queryset = queryset.filter(price__gte=mileage_min)
         if is_valid_queryparam(mileage_max):
