@@ -22,7 +22,7 @@ class IndexView(View):
 
 class SellCarView(LoginRequiredMixin, View):
     def get(self, request):
-        color = Car.objects.all()
+        color = Car.COLORS
         return render(request, 'add_offer.html', {'color': color})
 
     def post(self, request):
@@ -46,7 +46,6 @@ class SellCarView(LoginRequiredMixin, View):
               fuel_type=fuel_type, type=type, car_color=color)
         car.save()
         return redirect('offers')
-
 
 
 class OffersView(View):
