@@ -17,7 +17,7 @@
                             {% csrf_token %}
                             <div class="form-group m-3">
                                 <label>Marka</label>
-                                <input required name="car_brand" type="text" placeholder="Podaj markę samochodu"
+                                <input name="car_brand" type="text" placeholder="Podaj markę samochodu"
                                     class="form-control">
                             </div>
 
@@ -28,7 +28,7 @@
 
                             <div class="form-group m-3">
                                 <label>Opis</label>
-                                <input style="height:200px; width: 315px" required name="description" type="text" placeholder="Opisz ładnie swój samochód :)"
+                                <input style="height:200px; width: 315px" name="description" type="text" placeholder="Opisz ładnie swój samochód :)"
                                     class="form-control">
                             </div>
 

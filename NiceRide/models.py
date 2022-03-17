@@ -7,7 +7,7 @@ from django.db import models
 
 
 class Car(models.Model):
-    brand_of_car = models.CharField(max_length=64)
+    brand_of_car = models.CharField(max_length=64, null=True)
     car_model = models.CharField(max_length=64, default='')
     description = models.TextField()
     created = models.DateTimeField(default=timezone.now)

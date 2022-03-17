@@ -1,7 +1,7 @@
 import pytest
 from django.contrib.auth.models import User
 
-from NiceRide.models import Car, Opinions
+from NiceRide.models import Car, Opinions, Messages
 
 
 @pytest.fixture

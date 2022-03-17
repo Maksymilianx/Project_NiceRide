@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import UpdateView, DeleteView, ListView
+from rest_framework.response import Response
 
 from NiceRide.forms import OfferCreationForm, OpinionCreationForm, MessageCreationForm
 from NiceRide.models import Car, Opinions, Messages, ObserveCar
@@ -40,12 +41,11 @@ class SellCarView(LoginRequiredMixin, View):
         # images = request.FILES.getlist('images')
         type = request.POST.get('type')
         color = request.POST.get('color')
-
-        car = Car(brand_of_car=car_brand, car_model=car_model, description=description, created=date, price=price,
-              production_year=year, mileage=mileage, engine_capacity=engine, horse_power=hp, country=country,
-              fuel_type=fuel_type, type=type, car_color=color)
-        car.save()
-        return redirect('offers')
+        car_offer = Car(brand_of_car=car_brand, car_model=car_model, description=description, created=date, price=price,
+                        production_year=year, mileage=mileage, engine_capacity=engine, horse_power=hp, country=country,
+                        car_color=color, fuel_type=fuel_type, type=type)
+        car_offer.save()
+        return redirect("index")
 
 
 class OffersView(View):
@@ -80,7 +80,7 @@ class OfferAddBookmarksView(View):
         return redirect('details', id)
 
 
-class ShowBookmarksView(ListView):
+class ShowBookmarksView(LoginRequiredMixin, ListView):
     model = ObserveCar
     template_name = 'bookmarks_list.html'
 
