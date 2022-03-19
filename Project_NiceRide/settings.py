@@ -24,10 +24,13 @@ SECRET_KEY = 'django-insecure-fq@0)_hc4rjg$%@*$bpypq-%x!=ahsr#wnx#m&jf($&n0#!h)o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ADMINS = [('Maksymilian', 'krajewski.maksymilian@gmail.com')]
+
+ALLOWED_HOSTS = ['niceride.pl', '127.0.0.1']
 
 # Application definition
 
+# Django applications included in our project
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -74,6 +77,7 @@ WSGI_APPLICATION = 'Project_NiceRide.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# Configuration of databases used by the project
 try:
     from Project_NiceRide.local_settings import DATABASES
 except ModuleNotFoundError:
@@ -116,6 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+#  The URL at which static files (css, js, images, etc.) will be served.
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [

@@ -42,6 +42,7 @@ def test_add_offer_POST(user):
     response = c.post(url, {'brand_of_car': 'samochod', 'car_model': 'jakistam'})
     assert response.status_code == 200
 
+
 @pytest.mark.django_db
 def test_adv_search_GET(user):
     c = Client()
