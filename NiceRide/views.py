@@ -1,17 +1,11 @@
-import random
-from datetime import datetime
-
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from django.http import HttpResponseNotFound, HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import UpdateView, DeleteView, ListView
-from rest_framework.response import Response
 
-from NiceRide.forms import OfferCreationForm, OpinionCreationForm, MessageCreationForm
+from NiceRide.forms import OpinionCreationForm, MessageCreationForm
 from NiceRide.models import Car, Opinions, Messages, ObserveCar
 
 
