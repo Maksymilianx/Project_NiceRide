@@ -11,30 +11,30 @@ class Car(models.Model):
     car_model = models.CharField(max_length=64, default='')
     description = models.TextField()
     created = models.DateTimeField(default=timezone.now)
-    price = models.IntegerField(default=0)
-    production_year = models.SmallIntegerField(default=0)
-    mileage = models.IntegerField(default=0)
+    price = models.PositiveIntegerField(default=0)
+    production_year = models.PositiveSmallIntegerField(default=0)
+    mileage = models.PositiveIntegerField(default=0)
     engine_capacity = models.FloatField(default=0.0)
-    horse_power = models.IntegerField(default=0)
+    horse_power = models.PositiveSmallIntegerField(default=0)
     country = models.CharField(max_length=64, default='')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     images = models.ImageField(null=True, blank=True)
 
     COLORS = [
-        ('BEIGE', 'Beige'),
-        ('WHITE', 'White'),
-        ('BURGUNDY', 'Burgundy'),
-        ('BROWN', 'Brown'),
-        ('BLACK', 'Black'),
-        ('RED', 'Red'),
-        ('PURPLE', 'Purple'),
-        ('BLUE', 'Blue'),
-        ('SILVER', 'Silver'),
-        ('GRAY', 'Gray'),
-        ('GREEN', 'Green'),
-        ('GOLD', 'Gold'),
-        ('YELLOW', 'Yellow'),
-        ('DIFFERENT', 'Different color'),
+        ('BEIGE', 'Beżowy'),
+        ('WHITE', 'Biały'),
+        ('BURGUNDY', 'Bordowy'),
+        ('BROWN', 'Brązowy'),
+        ('BLACK', 'Czarny'),
+        ('RED', 'Czerwony'),
+        ('PURPLE', 'Fioletowy'),
+        ('BLUE', 'Niebieski'),
+        ('SILVER', 'Srebrny'),
+        ('GRAY', 'Szary'),
+        ('GREEN', 'Zielony'),
+        ('GOLD', 'Złoty'),
+        ('YELLOW', 'Żółty'),
+        ('DIFFERENT', 'Inny kolor'),
 
     ]
     car_color = models.CharField(
@@ -43,12 +43,12 @@ class Car(models.Model):
         choices=COLORS,
     )
     TYPE_OF_FUEL = [
-        ('PETROL', 'Petrol'),
+        ('PETROL', 'Benzyna'),
         ('DIESEL', 'Diesel'),
-        ('PETROL+LPG', 'Petrol + LPG'),
-        ('PETROL+CNG', 'Petrol + CNG'),
-        ('ELECTRIC', 'Electric'),
-        ('HYBRID', 'Hybrid'),
+        ('PETROL+LPG', 'Benzyna + LPG'),
+        ('PETROL+CNG', 'Benzyna + CNG'),
+        ('ELECTRIC', 'Elektryczny'),
+        ('HYBRID', 'Hybrydowy'),
     ]
     fuel_type = models.CharField(
         max_length=32,
